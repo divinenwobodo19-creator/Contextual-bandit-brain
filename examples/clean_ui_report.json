@@ -1,0 +1,19 @@
+{
+  "config": {
+    "seed": 0,
+    "d": 8,
+    "num_actions": 5,
+    "alpha": 0.5,
+    "steps": 2000,
+    "noise_std": 0.1
+  },
+  "metrics": {
+    "avg_reward_initial": 0.732471931951313,
+    "avg_reward_final": 0.8347097259263717,
+    "exploration_initial": 0.12,
+    "exploration_final": 0.005,
+    "cumulative_regret": 65.59433804927991,
+    "avg_regret_per_step": 0.03279716902463996,
+    "convergence_step": 285
+  }
+}

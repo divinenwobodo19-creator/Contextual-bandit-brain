@@ -1,5 +1,11 @@
+import os
+import sys
 import numpy as np
 import pytest
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(os.path.join(os.path.dirname(__file__), ".")))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 from brain import LinUCBBandit
 from simulator import ContextualBanditSimulator
@@ -28,4 +34,3 @@ def manual_ucb(A: np.ndarray, b: np.ndarray, x: np.ndarray, alpha: float) -> flo
     est = float(x.dot(theta))
     Ax_inv_x = float(x.dot(np.linalg.solve(A, x)))
     return est + float(alpha * np.sqrt(max(Ax_inv_x, 0.0)))
-

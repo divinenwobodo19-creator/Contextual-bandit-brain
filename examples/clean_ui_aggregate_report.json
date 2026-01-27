@@ -1,0 +1,238 @@
+{
+  "results": [
+    {
+      "domain": "education",
+      "config": {
+        "d": 8,
+        "num_actions": 5,
+        "alpha": 0.5,
+        "steps": 2000,
+        "noise_std": 0.1,
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "aggregate": {
+        "avg_reward_initial": 0.6391977516698848,
+        "avg_reward_final": 0.7413746787648091,
+        "exploration_initial": 0.127,
+        "exploration_final": 0.007000000000000001,
+        "cumulative_regret": 78.9798610589158,
+        "avg_regret_per_step": 0.039489930529457894,
+        "convergence_step": 325
+      },
+      "runs": [
+        {
+          "seed": 0,
+          "avg_reward_initial": 0.6517664899425577,
+          "avg_reward_final": 0.7430671161501814,
+          "exploration_initial": 0.09,
+          "exploration_final": 0.01,
+          "cumulative_regret": 56.017020687126035,
+          "avg_regret_per_step": 0.02800851034356302,
+          "convergence_step": 243
+        },
+        {
+          "seed": 1,
+          "avg_reward_initial": 0.6422886726984394,
+          "avg_reward_final": 0.7515511155650804,
+          "exploration_initial": 0.135,
+          "exploration_final": 0.0,
+          "cumulative_regret": 81.82274020561927,
+          "avg_regret_per_step": 0.04091137010280963,
+          "convergence_step": 292
+        },
+        {
+          "seed": 2,
+          "avg_reward_initial": 0.672834301324469,
+          "avg_reward_final": 0.7362600973191772,
+          "exploration_initial": 0.135,
+          "exploration_final": 0.005,
+          "cumulative_regret": 72.83313275186211,
+          "avg_regret_per_step": 0.036416566375931055,
+          "convergence_step": 268
+        },
+        {
+          "seed": 3,
+          "avg_reward_initial": 0.5951103269311221,
+          "avg_reward_final": 0.7243958008031219,
+          "exploration_initial": 0.15,
+          "exploration_final": 0.005,
+          "cumulative_regret": 101.01783921753578,
+          "avg_regret_per_step": 0.05050891960876789,
+          "convergence_step": 562
+        },
+        {
+          "seed": 4,
+          "avg_reward_initial": 0.6339889674528354,
+          "avg_reward_final": 0.7515992639864848,
+          "exploration_initial": 0.125,
+          "exploration_final": 0.015,
+          "cumulative_regret": 83.2085724324358,
+          "avg_regret_per_step": 0.0416042862162179,
+          "convergence_step": 262
+        }
+      ]
+    },
+    {
+      "domain": "finance",
+      "config": {
+        "d": 8,
+        "num_actions": 5,
+        "alpha": 0.5,
+        "steps": 2000,
+        "noise_std": 0.1,
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "aggregate": {
+        "avg_reward_initial": 0.7397467857124227,
+        "avg_reward_final": 0.8632057015366724,
+        "exploration_initial": 0.155,
+        "exploration_final": 0.007000000000000001,
+        "cumulative_regret": 80.83134663333904,
+        "avg_regret_per_step": 0.04041567331666952,
+        "convergence_step": 300
+      },
+      "runs": [
+        {
+          "seed": 0,
+          "avg_reward_initial": 0.7114462349935354,
+          "avg_reward_final": 0.8668307940472232,
+          "exploration_initial": 0.195,
+          "exploration_final": 0.005,
+          "cumulative_regret": 88.19210809366243,
+          "avg_regret_per_step": 0.044096054046831215,
+          "convergence_step": 327
+        },
+        {
+          "seed": 1,
+          "avg_reward_initial": 0.8096854818310006,
+          "avg_reward_final": 0.8776105768597787,
+          "exploration_initial": 0.14,
+          "exploration_final": 0.005,
+          "cumulative_regret": 67.14800258707916,
+          "avg_regret_per_step": 0.03357400129353958,
+          "convergence_step": 187
+        },
+        {
+          "seed": 2,
+          "avg_reward_initial": 0.6731886356262468,
+          "avg_reward_final": 0.8548554888112253,
+          "exploration_initial": 0.125,
+          "exploration_final": 0.01,
+          "cumulative_regret": 109.56568654612478,
+          "avg_regret_per_step": 0.05478284327306239,
+          "convergence_step": 466
+        },
+        {
+          "seed": 3,
+          "avg_reward_initial": 0.7348597492199308,
+          "avg_reward_final": 0.8362645441777016,
+          "exploration_initial": 0.165,
+          "exploration_final": 0.005,
+          "cumulative_regret": 84.7143272671159,
+          "avg_regret_per_step": 0.04235716363355795,
+          "convergence_step": 352
+        },
+        {
+          "seed": 4,
+          "avg_reward_initial": 0.7695538268914001,
+          "avg_reward_final": 0.880467103787434,
+          "exploration_initial": 0.15,
+          "exploration_final": 0.01,
+          "cumulative_regret": 54.53660867271295,
+          "avg_regret_per_step": 0.027268304336356474,
+          "convergence_step": 169
+        }
+      ]
+    },
+    {
+      "domain": "abstract",
+      "config": {
+        "d": 8,
+        "num_actions": 5,
+        "alpha": 0.5,
+        "steps": 2000,
+        "noise_std": 0.1,
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "aggregate": {
+        "avg_reward_initial": 0.7423016923154372,
+        "avg_reward_final": 0.8317745577512852,
+        "exploration_initial": 0.138,
+        "exploration_final": 0.003,
+        "cumulative_regret": 65.47011627038664,
+        "avg_regret_per_step": 0.03273505813519332,
+        "convergence_step": 271
+      },
+      "runs": [
+        {
+          "seed": 0,
+          "avg_reward_initial": 0.7240687218125378,
+          "avg_reward_final": 0.8222197502633306,
+          "exploration_initial": 0.15,
+          "exploration_final": 0.0,
+          "cumulative_regret": 63.011003430014554,
+          "avg_regret_per_step": 0.031505501715007274,
+          "convergence_step": 244
+        },
+        {
+          "seed": 1,
+          "avg_reward_initial": 0.8077786574125326,
+          "avg_reward_final": 0.8644736223371978,
+          "exploration_initial": 0.1,
+          "exploration_final": 0.0,
+          "cumulative_regret": 53.63194400702949,
+          "avg_regret_per_step": 0.026815972003514744,
+          "convergence_step": 199
+        },
+        {
+          "seed": 2,
+          "avg_reward_initial": 0.7274916280543655,
+          "avg_reward_final": 0.8180933608053499,
+          "exploration_initial": 0.16,
+          "exploration_final": 0.01,
+          "cumulative_regret": 79.99769893550624,
+          "avg_regret_per_step": 0.03999884946775312,
+          "convergence_step": 301
+        },
+        {
+          "seed": 3,
+          "avg_reward_initial": 0.7310773650382444,
+          "avg_reward_final": 0.8051759709997802,
+          "exploration_initial": 0.125,
+          "exploration_final": 0.0,
+          "cumulative_regret": 62.02686396042491,
+          "avg_regret_per_step": 0.031013431980212457,
+          "convergence_step": 267
+        },
+        {
+          "seed": 4,
+          "avg_reward_initial": 0.7210920892595055,
+          "avg_reward_final": 0.8489100843507674,
+          "exploration_initial": 0.155,
+          "exploration_final": 0.005,
+          "cumulative_regret": 68.68307101895799,
+          "avg_regret_per_step": 0.03434153550947899,
+          "convergence_step": 347
+        }
+      ]
+    }
+  ]
+}
