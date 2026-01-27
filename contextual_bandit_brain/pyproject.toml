@@ -2,7 +2,7 @@
 name = "contextual_bandit_brain"
 version = "0.1.0"
 description = "Standalone LinUCB decision engine with simulator and BIS benchmarking"
-authors = [{name = "TraeAI"}]
+authors = [{name = "Contextual-bandit-brain"}]
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.23", "matplotlib>=3.6"]
