@@ -19,15 +19,9 @@ from ..reporting.plots import (
 
 
 def write_json_report(out_dir: str, bis_score: float, metrics: Dict[str, float]) -> str:
-    data = {
-        "bis_score": float(bis_score),
-        "reward": float(metrics["reward"]),
-        "regret": float(metrics["regret"]),
-        "stability": float(metrics["stability"]),
-        "adaptability": float(metrics["adaptability"]),
-        "fairness": float(metrics["fairness"]),
-        "pass": bool(bis_score >= 0.75),
-    }
+    data = {"bis_score": float(bis_score), "pass": bool(bis_score >= 0.75)}
+    for k, v in metrics.items():
+        data[k] = float(v)
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "bis_report.json")
     with open(path, "w", encoding="utf-8") as f:
@@ -43,4 +37,3 @@ def generate_plots(out_dir: str, rewards: np.ndarray, regrets: np.ndarray, explo
     counts = np.bincount(chosen_actions, minlength=int(np.max(chosen_actions) + 1)).astype(int)
     plot_arm_distribution(counts, out_dir)
     plot_bis_gauge(bis_score, out_dir)
-

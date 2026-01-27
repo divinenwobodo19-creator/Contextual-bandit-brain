@@ -41,6 +41,12 @@ brain.update(a, r, x)
 python contextual_bandit_brain/ci/run_bis_ci.py
 ```
 
+### Brain Evaluation (CI-ready)
+```bash
+python ci/run_brain_evaluation.py
+```
+Generates JSON and plots to `/artifacts`, including BIS and auxiliary metrics like exploration ratio. Exits non-zero if BIS < 0.75.
+
 Artifacts saved to `/artifacts`:
 - `bis_report.json`
 - `cumulative_reward.png`
@@ -51,6 +57,11 @@ Artifacts saved to `/artifacts`:
 
 ## Simulations
 Run `examples/run_full_simulation.py` to validate end-to-end behavior under drift.
+
+From repo root:
+```bash
+python examples/run_simulation.py
+```
 
 ## Integration
 Integrate `LinUCBBrain` in any backend:
