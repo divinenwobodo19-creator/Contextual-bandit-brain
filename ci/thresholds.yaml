@@ -1,0 +1,6 @@
+bis_threshold: 0.75
+steps: 1000
+alpha: 0.5
+num_actions: 5
+d: 8
+noise_std: 0.1
