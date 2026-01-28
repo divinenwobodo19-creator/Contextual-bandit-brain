@@ -9,6 +9,7 @@ Interface:
 from __future__ import annotations
 
 from typing import List, Dict, Any, Optional
+import json
 import numpy as np
 
 from .arm import LinUCBArm
@@ -88,3 +89,29 @@ class LinUCBBrain:
             raise RuntimeError("No decision to explain")
         return dict(self._last_decision)
 
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "alpha": float(self._alpha),
+            "d": int(self._d),
+            "num_actions": int(self._num_actions),
+            "arms": [a.to_dict() for a in self._arms],
+            "last_decision": None if self._last_decision is None else dict(self._last_decision),
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "LinUCBBrain":
+        obj = cls(num_actions=int(data["num_actions"]), alpha=float(data["alpha"]), d=int(data["d"]))
+        obj._arms = [LinUCBArm.from_dict(a) for a in data["arms"]]
+        ld = data.get("last_decision", None)
+        obj._last_decision = None if ld is None else dict(ld)
+        return obj
+
+    def save_state(self, path: str) -> None:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(self.to_dict(), f)
+
+    @classmethod
+    def load_state(cls, path: str) -> "LinUCBBrain":
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return cls.from_dict(data)
