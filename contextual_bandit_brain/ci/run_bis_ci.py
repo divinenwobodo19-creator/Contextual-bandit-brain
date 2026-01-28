@@ -27,7 +27,7 @@ from contextual_bandit_brain.bis.metrics import (
     compute_adaptability,
     compute_fairness,
 )
-from contextual_bandit_brain.reporting.report_generator import write_json_report, generate_plots
+from contextual_bandit_brain.reporting.report_generator import write_json_report, generate_plots, write_text_summary
 
 
 def expected_reward(theta: np.ndarray, x: np.ndarray) -> float:
@@ -108,7 +108,9 @@ def main() -> int:
     agg = {key: float(np.mean([m[key] for m in metrics_runs])) for key in metrics_runs[0].keys()}
     bis = float(0.35 * agg["reward"] + 0.25 * agg["regret"] + 0.15 * agg["stability"] + 0.15 * agg["adaptability"] + 0.10 * agg["fairness"])
     write_json_report(ARTIFACTS_DIR, bis_score=bis, metrics=agg)
-    return 0 if bis >= 0.75 else 1
+    write_text_summary(ARTIFACTS_DIR, bis_score=bis, metrics=agg)
+    threshold = float(os.environ.get("BIS_THRESHOLD", "0.75"))
+    return 0 if bis >= threshold else 1
 
 
 if __name__ == "__main__":

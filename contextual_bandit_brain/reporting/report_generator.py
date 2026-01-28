@@ -37,3 +37,17 @@ def generate_plots(out_dir: str, rewards: np.ndarray, regrets: np.ndarray, explo
     counts = np.bincount(chosen_actions, minlength=int(np.max(chosen_actions) + 1)).astype(int)
     plot_arm_distribution(counts, out_dir)
     plot_bis_gauge(bis_score, out_dir)
+
+
+def write_text_summary(out_dir: str, bis_score: float, metrics: Dict[str, float]) -> str:
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, "bis_summary.txt")
+    lines = []
+    lines.append(f"BIS: {bis_score:.4f}")
+    lines.append(f"PASS: {bis_score >= 0.75}")
+    for k in sorted(metrics.keys()):
+        lines.append(f"{k}: {float(metrics[k]):.4f}")
+    content = "\n".join(lines)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+    return path
