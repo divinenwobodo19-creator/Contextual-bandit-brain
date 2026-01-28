@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 import sys
 import json
+import argparse
 from typing import Tuple, Dict, Any, List
 import numpy as np
 
@@ -62,12 +63,23 @@ def run_episode(env: Environment, brain: LinUCBBrain, steps: int) -> Tuple[np.nd
 
 
 def main() -> int:
-    d = int(os.environ.get("LINUCB_D", "8"))
-    num_actions = int(os.environ.get("LINUCB_ACTIONS", "5"))
-    alpha = float(os.environ.get("LINUCB_ALPHA", "0.5"))
-    steps1 = int(os.environ.get("LINUCB_STEPS1", "2000"))
-    steps2 = int(os.environ.get("LINUCB_STEPS2", "2000"))
-    seeds = [0, 1]
+    parser = argparse.ArgumentParser(prog="run_brain_evaluation")
+    parser.add_argument("--d", type=int, default=int(os.environ.get("LINUCB_D", "8")))
+    parser.add_argument("--actions", type=int, default=int(os.environ.get("LINUCB_ACTIONS", "5")))
+    parser.add_argument("--alpha", type=float, default=float(os.environ.get("LINUCB_ALPHA", "0.5")))
+    parser.add_argument("--steps1", type=int, default=int(os.environ.get("LINUCB_STEPS1", "2000")))
+    parser.add_argument("--steps2", type=int, default=int(os.environ.get("LINUCB_STEPS2", "2000")))
+    parser.add_argument("--seeds", type=int, nargs="*", default=[0, 1])
+    parser.add_argument("--threshold", type=float, default=float(os.environ.get("BIS_THRESHOLD", "0.75")))
+    args = parser.parse_args()
+
+    d = args.d
+    num_actions = args.actions
+    alpha = args.alpha
+    steps1 = args.steps1
+    steps2 = args.steps2
+    seeds = args.seeds
+    threshold = args.threshold
 
     metrics_runs = []
     for seed in seeds:
@@ -111,7 +123,6 @@ def main() -> int:
     bis = compute_bis({"reward": agg["reward"], "regret": agg["regret"], "stability": agg["stability"], "adaptability": agg["adaptability"], "fairness": agg["fairness"]})
     write_json_report(ARTIFACTS_DIR, bis_score=bis, metrics=agg)
     write_text_summary(ARTIFACTS_DIR, bis_score=bis, metrics=agg)
-    threshold = float(os.environ.get("BIS_THRESHOLD", "0.75"))
     return 0 if bis >= threshold else 1
 
 
