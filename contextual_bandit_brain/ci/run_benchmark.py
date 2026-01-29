@@ -45,7 +45,9 @@ def main() -> int:
         rewards.append(float(r))
         chosen_actions.append(int(a))
         exploration_flags.append(1.0 if decision.diagnostics["mode"] == "exploration" else 0.0)
-        best_estimated = np.max([env.reward(k, x) for k in range(num_actions)])
+        thetas = env.theta()
+        exp_rewards = [expected_reward(thetas[k], x) for k in range(num_actions)]
+        best_estimated = float(np.max(exp_rewards))
         regrets.append(float(best_estimated - r))
         best_exp_series.append(float(best_estimated))
         best_exp_sum += float(best_estimated)
@@ -84,6 +86,10 @@ def main() -> int:
 def context_to_list(x: np.ndarray) -> list[float]:
     return np.asarray(x, dtype=float).reshape(-1).tolist()
 
+
+def expected_reward(theta: np.ndarray, x: np.ndarray) -> float:
+    raw = float(x.dot(theta))
+    return float(1.0 / (1.0 + np.exp(-raw)))
 
 if __name__ == "__main__":
     sys.exit(main())

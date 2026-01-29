@@ -30,6 +30,9 @@ jobs:
         env:
           BIS_THRESHOLD: '0.75'
         run: python ci/run_brain_evaluation.py --threshold "${BIS_THRESHOLD}"
+      - name: Run BIS benchmark (headless)
+        shell: bash
+        run: python -m contextual_bandit_brain.ci.run_benchmark
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4

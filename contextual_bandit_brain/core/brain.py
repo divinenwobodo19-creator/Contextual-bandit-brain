@@ -16,10 +16,6 @@ from .arm import LinUCBArm
 from .linucb import score_actions
 
 
-class LinUCBBrian:  # intentional name in doc but use LinUCBBrain class below
-    pass
-
-
 class LinUCBBrain:
     """
     Standalone LinUCB decision engine.

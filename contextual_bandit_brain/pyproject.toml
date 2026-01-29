@@ -9,4 +9,4 @@ dependencies = ["numpy>=1.23", "matplotlib>=3.6"]
 optional-dependencies = { api = ["fastapi>=0.110", "pydantic>=2.0", "uvicorn>=0.22"], ci = ["PyYAML>=6.0"] }
 
 [tool.pytest.ini_options]
-testpaths = ["contextual_bandit_brain/tests"]
+testpaths = ["contextual_bandit_brain/tests", "tests"]
