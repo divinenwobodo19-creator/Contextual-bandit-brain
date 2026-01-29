@@ -1,4 +1,4 @@
-bis_threshold: 0.75
+bis_threshold: 0.90
 steps: 1000
 alpha: 0.5
 num_actions: 5

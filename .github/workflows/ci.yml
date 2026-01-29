@@ -28,7 +28,7 @@ jobs:
       - name: Run brain evaluation
         shell: bash
         env:
-          BIS_THRESHOLD: '0.75'
+          BIS_THRESHOLD: '0.90'
         run: python ci/run_brain_evaluation.py --threshold "${BIS_THRESHOLD}"
       - name: Run BIS benchmark (headless)
         shell: bash
