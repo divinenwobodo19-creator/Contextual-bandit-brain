@@ -19,7 +19,10 @@ class StudentModel:
         if d <= 0:
             raise ValueError("feature dimension d must be positive")
         self._d = int(d)
-        self._rng = np.random.default_rng(seed)
+        try:
+            self._rng = np.random.default_rng(seed)
+        except AttributeError:
+            self._rng = np.random.RandomState(seed)
 
     @property
     def d(self) -> int:
@@ -30,4 +33,3 @@ class StudentModel:
         time = self._rng.normal(0.0, 0.5)
         base[-1] = time
         return base
-

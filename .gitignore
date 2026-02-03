@@ -7,3 +7,5 @@ tests/report.xml
 linucb_state.json
 examples/metrics.json
 ci/bis_report.json
+artifacts/
+.venv/

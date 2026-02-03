@@ -26,11 +26,6 @@ from contextual_bandit_brain.bis.scoring import compute_bis
 from contextual_bandit_brain.reporting.report_generator import write_json_report, generate_plots, write_text_summary
 
 
-def expected_reward(theta: np.ndarray, x: np.ndarray) -> float:
-    raw = float(x.dot(theta))
-    return 1.0 / (1.0 + np.exp(-raw))
-
-
 def sampler(rng: np.random.Generator, d: int) -> np.ndarray:
     return rng.normal(0.0, 1.0, size=d).astype(float)
 
@@ -49,7 +44,7 @@ def run_episode(env: Environment, brain: LinUCBBrain, steps: int) -> Tuple[np.nd
         r = env.reward(a, x)
         brain.update(a, r, x)
         rewards.append(r)
-        exp_rewards = [expected_reward(env.theta()[i], x) for i in range(env.num_actions)]
+        exp_rewards = [env.expected_reward(i, x) for i in range(env.num_actions)]
         regrets.append(max(exp_rewards) - exp_rewards[a])
         chosen.append(a)
         contexts.append(x)
@@ -71,6 +66,7 @@ def main() -> int:
     parser.add_argument("--steps2", type=int, default=int(os.environ.get("LINUCB_STEPS2", "2000")))
     parser.add_argument("--seeds", type=int, nargs="*", default=[0, 1])
     parser.add_argument("--threshold", type=float, default=float(os.environ.get("BIS_THRESHOLD", "0.75")))
+    parser.add_argument("--reward_mode", type=str, choices=["logistic", "linear"], default=os.environ.get("REWARD_MODE", "logistic"))
     args = parser.parse_args()
 
     d = args.d
@@ -80,15 +76,16 @@ def main() -> int:
     steps2 = args.steps2
     seeds = args.seeds
     threshold = args.threshold
+    reward_mode = args.reward_mode
 
     metrics_runs = []
     for seed in seeds:
-        env = Environment(d=d, num_actions=num_actions, noise_std=0.1, seed=seed)
+        env = Environment(d=d, num_actions=num_actions, noise_std=0.1, seed=seed, reward_mode=reward_mode)
         brain = LinUCBBrain(num_actions=num_actions, alpha=alpha, d=d)
         rewards1, regrets1, chosen1, exploration1, contexts1 = run_episode(env, brain, steps1)
         env.drift(scale=0.6)
         rewards2, regrets2, chosen2, exploration2, contexts2 = run_episode(env, brain, steps2)
-        best_exp_sum = float(np.sum([max([expected_reward(env.theta()[i], x) for i in range(env.num_actions)]) for x in contexts1]))
+        best_exp_sum = float(np.sum([max([env.expected_reward(i, x) for i in range(env.num_actions)]) for x in contexts1]))
         reward_score = compute_reward_score(rewards1, best_exp_sum)
         regret_eff = compute_regret_efficiency(regrets1, best_exp_sum)
         stability = compute_stability(chosen1, env.num_actions, window=max(100, steps1 // 10))
@@ -99,7 +96,7 @@ def main() -> int:
             if val <= 0.05:
                 conv_step = idx + conv_win - 1
                 break
-        adaptability = compute_adaptability(rewards2, np.asarray([max([expected_reward(env.theta()[i], x) for i in range(env.num_actions)]) for x in contexts2]), conv_step, steps2)
+        adaptability = compute_adaptability(rewards2, np.asarray([max([env.expected_reward(i, x) for i in range(env.num_actions)]) for x in contexts2]), conv_step, steps2)
         fairness = compute_fairness(np.concatenate([chosen1, chosen2]), env.num_actions)
         exploration_ratio = float(np.mean(np.concatenate([exploration1, exploration2]).astype(float)))
         metrics_runs.append({
